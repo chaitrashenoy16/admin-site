@@ -14,7 +14,7 @@ const Userslist = () => {
       usertype: "Senior",
     },
     {
-      uid: "e001",
+      uid: "e003",
       userName: "Chaitra",
       companyId: "E007",
       companyName: "TCS",
@@ -22,7 +22,7 @@ const Userslist = () => {
       usertype: "Senior",
     },
     {
-      uid: "e001",
+      uid: "e004",
       userName: "Sakshi",
       companyId: "E008",
       companyName: "ABC",
@@ -30,7 +30,7 @@ const Userslist = () => {
       usertype: "Senior",
     },
     {
-      uid: "e001",
+      uid: "e008",
       userName: "Diya",
       companyId: "Admin",
       companyName: "Trivium",

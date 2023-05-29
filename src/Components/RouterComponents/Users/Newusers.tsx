@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
+
 const Newusers = () => {
   const navigate = useNavigate();
   let data;
+
   const onSave = () => {
     data = {
       username: document.getElementById("usersname")?.value,
