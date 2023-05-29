@@ -8,7 +8,6 @@ interface Props {
 const Client = () => {
   const navigate = useNavigate();
   const goDetails = (item: Props) => {
-    navigate("/details/e001");
     navigate(`/details/${item.clientId}`);
   };
   let clients = [
