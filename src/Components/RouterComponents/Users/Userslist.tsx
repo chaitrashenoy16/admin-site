@@ -1,8 +1,16 @@
 import { useNavigate } from "react-router-dom";
+interface Props {
+  uid: string;
+  userName: string;
+  companyId: string;
+  companyName: string;
+  userPermission: string;
+  usertype: string;
+}
 const Userslist = () => {
   const navigate = useNavigate();
-  const goDetails = () => {
-    navigate("/user/e001");
+  const goDetails = (item: Props) => {
+    navigate(`/user/${item.uid}`);
   };
   let users = [
     {
@@ -59,7 +67,7 @@ const Userslist = () => {
             <td>{item.userPermission}</td>
             <td>{item.usertype}</td>
             <td>
-              <button onClick={goDetails}>Details</button>
+              <button onClick={() => goDetails(item)}>Details</button>
             </td>
           </tr>
         ))}
