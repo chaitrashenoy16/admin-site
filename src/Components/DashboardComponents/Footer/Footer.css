@@ -1,0 +1,11 @@
+.footer-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.footer-style {
+  color: gray;
+  position: absolute;
+  bottom: 0;
+}
