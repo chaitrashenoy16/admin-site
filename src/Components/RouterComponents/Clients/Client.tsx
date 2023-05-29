@@ -1,8 +1,15 @@
 import { useNavigate } from "react-router-dom";
+interface Props {
+  clientId: string;
+  clientName: string;
+  clientPermission: string;
+  dateofBirth: string;
+}
 const Client = () => {
   const navigate = useNavigate();
-  const goDetails = () => {
+  const goDetails = (item: Props) => {
     navigate("/details/e001");
+    navigate(`/details/${item.clientId}`);
   };
   let clients = [
     {
@@ -24,7 +31,7 @@ const Client = () => {
       dateofBirth: "27/11/1980",
     },
     {
-      clientId: "e001",
+      clientId: "e005",
       clientName: "Kaveri",
       clientPermission: "Admin",
       dateofBirth: "9/6/1991",
@@ -47,7 +54,7 @@ const Client = () => {
             <td>{item.clientPermission}</td>
             <td>{item.dateofBirth}</td>
             <td>
-              <button onClick={goDetails}>Details</button>
+              <button onClick={() => goDetails(item)}>Details</button>
             </td>
           </tr>
         ))}
