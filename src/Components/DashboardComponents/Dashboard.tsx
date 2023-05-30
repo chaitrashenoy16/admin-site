@@ -13,10 +13,14 @@ const Dashboard = () => {
     <div>
       <Header />
       <div>
-        <p>
-          Welcome <b>{localStorage.getItem("uname")} </b>to the portal
-        </p>
-        <button onClick={doLogout}>Logout</button>
+        <div className="row">
+          <div className="col-11">
+            Welcome <b>{localStorage.getItem("uname")} </b>to the portal
+          </div>
+          <div className="col-1">
+            <button onClick={doLogout}>Logout</button>
+          </div>
+        </div>
       </div>
       <Menu />
       <Footer />
