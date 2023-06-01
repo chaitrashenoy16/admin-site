@@ -1,40 +1,62 @@
 import { useNavigate } from "react-router-dom";
-import { users } from "./Userdata";
-interface Props {
-  uid: string;
-  userName: string;
-  companyId: string;
-  companyName: string;
-  userPermission: string;
-  usertype: string;
-}
+import axios from "axios";
+import { useEffect, useState } from "react";
 const Userslist = () => {
+  const [users, setUsers] = useState<Users[]>([]);
+  const [error, setError] = useState();
+  const [isLoading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const goDetails = (item: Props) => {
-    navigate(`/user/${item.uid}`);
+  const goDetails = (item: Users) => {
+    navigate(`/user/${item.id}`);
+  };
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get("http://localhost:5024/api/Admin/getuserList")
+      .then((response) => {
+        setUsers(response.data);
+      })
+      .catch((error) => setError(error?.message))
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+  const deleteUser = (user: Users) => {
+    const orginalState = [...users];
+    setUsers(users.filter((x) => x.id !== user.id));
+    axios
+      .delete("http://localhost:5024/api/Admin/deleteUser/" + user.id)
+      .catch((err) => {
+        setError(err.message);
+        setUsers(orginalState);
+      });
   };
 
+  if (error) return <p>{error}</p>;
   return (
     <>
       <tbody>
         <tr>
-          <th>UID</th>
-          <th>UserName</th>
-          <th>CompanyId</th>
-          <th>CompanyName</th>
-          <th>UserPermission</th>
+          <th>ID</th>
+          <th>Username</th>
+          <th>Companyid</th>
+          <th>Companyname</th>
           <th>Usertype</th>
+          <th>Userpermission</th>
         </tr>
-        {users.map((item, index) => (
+        {users?.map((item, index) => (
           <tr key={index}>
-            <td>{item.uid}</td>
-            <td>{item.userName}</td>
-            <td>{item.companyId}</td>
-            <td>{item.companyName}</td>
-            <td>{item.userPermission}</td>
+            <td>{item.id}</td>
+            <td>{item.username}</td>
+            <td>{item.companyid}</td>
+            <td>{item.companyname}</td>
             <td>{item.usertype}</td>
+            <td>{item.userpermission}</td>
             <td>
               <button onClick={() => goDetails(item)}>Details</button>
+            </td>
+            <td>
+              <button onClick={() => deleteUser(item)}>Delete</button>
             </td>
           </tr>
         ))}
